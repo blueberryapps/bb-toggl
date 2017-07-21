@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #2F3242;
+  height: 75px;
+}
+
+.content {
+  background-color: #FFFFFF;
+  flex: auto;
+}
