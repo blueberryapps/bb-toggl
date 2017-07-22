@@ -3,7 +3,8 @@ import { LOGIN_SUCCESS, LOGOUT } from '../actions/toggl';
 const initialState = {
   apiToken: null,
   isLogged: false,
-  response: null,
+  projects: null,
+  timeEntries: null,
 };
 
 export const toggl = (state = initialState, action) => {
@@ -13,7 +14,8 @@ export const toggl = (state = initialState, action) => {
         ...state,
         apiToken: action.payload.data.api_token,
         isLogged: true,
-        response: action.payload
+        projects: action.payload.data.projects,
+        timeEntries: action.payload.data.time_entries
       };
     case LOGOUT:
       return {
