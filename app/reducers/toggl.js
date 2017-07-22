@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from '../actions/toggl';
+import { LOGIN_SUCCESS, LOGOUT } from '../actions/toggl';
 
 const initialState = {
   apiToken: null,
@@ -14,6 +14,10 @@ export const toggl = (state = initialState, action) => {
         apiToken: action.payload.data.api_token,
         isLogged: true,
         response: action.payload
+      };
+    case LOGOUT:
+      return {
+        ...initialState
       };
     default:
       return state;
