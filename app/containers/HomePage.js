@@ -8,7 +8,7 @@ import { loadInitialData as loadInitialDataAction } from '../actions/toggl';
 export class HomePage extends Component {
   props: {
     loadInitialData: any,
-    response: any
+    response: any,
   }
 
   componentWillMount() {

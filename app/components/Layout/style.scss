@@ -1,16 +1,28 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  background-color: #2F3242;
 }
 
 .header {
+  position: relative;
   background-color: #2F3242;
   height: 75px;
   padding: 0 16px;
+  transition: all 1s;
+  overflow: hidden;
 }
 
 .content {
   flex: auto;
   overflow: auto;
   height: calc(100vh - 75px);
+  border-radius: 3px 3px 0 0;
+  background-color: #F2F3F8;
+}
+
+.isLoggin {
+  height: 100vh;
+  align-items: center;
+  transition: all .5s;
 }
