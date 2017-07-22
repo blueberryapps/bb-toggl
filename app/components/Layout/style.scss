@@ -2,15 +2,17 @@
   display: flex;
   flex-direction: column;
   background-color: #2F3242;
+  padding-top: 16px;
 }
 
 .header {
   position: relative;
   background-color: #2F3242;
-  height: 75px;
+  height: 65px;
   padding: 0 16px;
   transition: all 1s;
   overflow: hidden;
+  -webkit-app-region: drag;
 }
 
 .content {

@@ -11,6 +11,7 @@
  * @flow
  */
 import { app, BrowserWindow } from 'electron';
+import path from 'path';
 import MenuBuilder from './menu';
 
 let mainWindow = null;
@@ -22,7 +23,6 @@ if (process.env.NODE_ENV === 'production') {
 
 if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
   require('electron-debug')();
-  const path = require('path');
   const p = path.join(__dirname, '..', 'app', 'node_modules');
   require('module').globalPaths.push(p);
 }
@@ -53,16 +53,19 @@ app.on('window-all-closed', () => {
   }
 });
 
-
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
   }
 
   mainWindow = new BrowserWindow({
-    show: false,
-    width: 1024,
-    height: 728
+    show: true,
+    width: 960,
+    height: 728,
+    minWidth: 460,
+    minHeight: 528,
+    frame: true,
+    titleBarStyle: 'hidden-inset',
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);

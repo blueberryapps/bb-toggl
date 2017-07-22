@@ -23,9 +23,11 @@
 .footer {
   position: absolute;
   bottom: 16px;
+  left: 0;
   width: 100%;
   animation: fade-in 1s backwards;
   user-select: none;
+  margin-bottom: 16px;
 }
 
 .footerWrapper {
@@ -33,9 +35,10 @@
   width: 140px;
   margin: 0 auto;
   font-size: 12px;
-  color: rgba(0, 0, 0, .2);
+  color: #262835;
   text-align: center;
   transition: all .25s;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .05);
   &:hover {
     color: rgba(0, 0, 0, .4);
     .circleWrapper {
@@ -70,6 +73,7 @@
   height: 6px;
   border-radius: 99px;
   border: 2px rgba(0, 0, 0, .2) solid;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .1);
   transition: all .25s;
 }
 
@@ -80,6 +84,7 @@
   height: 12px;
   border-radius: 99px;
   border: 2px rgba(0, 0, 0, .2) solid;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .1);
   margin-left: 6px;
   transition: all .25s;
 }
