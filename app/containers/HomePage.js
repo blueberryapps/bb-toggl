@@ -1,8 +1,7 @@
-// @flow
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {login} from '../actions/login';
+import { login as loginActions } from '../actions/login';
 
 class HomePage extends Component {
   async componentDidMount() {
@@ -24,10 +23,10 @@ class HomePage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ login }, dispatch);
+  bindActionCreators({ loginActions }, dispatch);
 
 const mapStateToProps = (state) => ({
   response: state.login.response
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

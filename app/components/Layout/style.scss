@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #2F3242;
+  height: 75px;
+  padding: 0 16px;
+}
+
+.content {
+  flex: auto;
+  overflow: auto;
+  height: calc(100vh - 75px);
+}
