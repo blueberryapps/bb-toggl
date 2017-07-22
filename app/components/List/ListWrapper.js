@@ -7,17 +7,17 @@ export default class ListWrapper extends Component {
   props: {
     children: Children,
     date: string,
-    time: string
+    totalTime: string
   };
 
   render() {
-    const { children, date, time } = this.props;
+    const { children, date, totalTime } = this.props;
     return (
       <div>
         <div className={style.date}>
           {date}
           <span className={style.time}>
-            {time}
+            {totalTime}
           </span>
         </div>
         <ul className={style.list}>
