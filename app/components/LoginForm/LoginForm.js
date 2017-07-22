@@ -20,21 +20,21 @@ export class App extends Component {
   }
 
   render() {
-    const { isLogged, isLoading, wasLoaded, error } = this.props;
+    const { isLoading, wasLoaded, error } = this.props;
     return (
       <div className={style.login}>
         <div className={style.loginContent}>
           <form>
             <div className={style.inputWrapper}>
-              <lable className={style.inputLabel}>
+              <label className={style.inputLabel}>
                 Email:
-                </lable>
+              </label>
               <input ref="email" className={style.input} type="text" placeholder="Email" />
             </div>
             <div className={style.inputWrapper}>
-              <lable className={style.inputLabel}>
+              <label className={style.inputLabel}>
                 Password:
-                </lable>
+              </label>
               <input ref="pass" className={style.input} type="password" placeholder="Password" />
             </div>
             {error &&
