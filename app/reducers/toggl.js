@@ -39,7 +39,11 @@ export const toggl = (state = initialState, action) => {
       };
     case LOGOUT:
       return {
-        ...initialState
+        ...state,
+        isLogged: false,
+        wasLoaded: false,
+        error: false,
+        apiToken: null
       };
     default:
       return state;
