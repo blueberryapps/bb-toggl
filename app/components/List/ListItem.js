@@ -1,19 +1,15 @@
-// @flow
 import React, { Component } from 'react';
 import style from './style.scss';
 
 export default class ListWrapper extends Component {
   props: {
     description: string,
-    project: string,
+    project: ?number,
     company: string,
-    time: string,
+    time: number,
     startTime: string,
-    endTime: string,
-    tag: [{
-      name: string,
-      id: string | number
-    }]
+    endTime: ?string,
+    tag: ?[string]
   };
 
 
@@ -40,11 +36,11 @@ export default class ListWrapper extends Component {
               }
             </div>
 
-            {tag.length !== 0 &&
+            {tag && tag.length !== 0 &&
               <div className={style.tagWrapper}>
                 {tag.map((item) =>
-                  (<div key={item.id} className={style.tag}>
-                    {item.name}
+                  (<div key={item} className={style.tag}>
+                    {item}
                   </div>)
                 )}
               </div>

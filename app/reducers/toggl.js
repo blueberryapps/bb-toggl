@@ -2,6 +2,7 @@ import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, LOGIN_START } from '../actions/togg
 
 const initialState = {
   apiToken: null,
+  clients: null,
   isLogged: false,
   response: null,
   isLoading: false,
@@ -23,6 +24,7 @@ export const toggl = (state = initialState, action) => {
       return {
         ...state,
         apiToken: action.payload.data.api_token,
+        clients: action.payload.data.clients,
         isLogged: true,
         isLoading: false,
         wasLoaded: true,
