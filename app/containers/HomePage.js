@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as List from '../components/List';
 import { login as loginAction } from '../actions/toggl';
+import { groupByTimeEntryDate, secondsToHours } from '../utils/helpers';
 
 export class HomePage extends Component {
   props: {
@@ -55,13 +56,6 @@ export class HomePage extends Component {
     );
   }
 }
-
-const secondsToHours = (seconds) => moment('1900-01-01').startOf('day').seconds(seconds).format('H[h] mm[m] ss[s]');
-
-const groupByTimeEntryDate = (timeEntries) => timeEntries.reduce((acc, cur) => {
-  const date = moment(cur.start).format('DD.MM.YYYY');
-  return { ...acc, [date]: [...acc[date] || [], cur] };
-}, {});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   login: loginAction
