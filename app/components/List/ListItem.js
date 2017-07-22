@@ -25,14 +25,14 @@ export default class ListWrapper extends Component {
 
             <div className={style.projectWrapper}>
               {project &&
-              <span className={style.project}>
-                {project}
-              </span>
+                <span className={style.project}>
+                  {project}
+                </span>
               }
               {company &&
-              <span className={style.company}>
-                {company}
-              </span>
+                <span className={style.company}>
+                  - {company}
+                </span>
               }
             </div>
 
