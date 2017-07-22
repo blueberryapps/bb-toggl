@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as List from '../components/List';
 import mockData from './mockData.json';
-import { loadInitialData as loadInitialDataAction } from '../actions/toggl';
+import { login as loginAction } from '../actions/toggl';
 
 export class HomePage extends Component {
   props: {
-    loadInitialData: any,
-    response: any
+    login: any,
+    data: any
   }
 
   componentWillMount() {
-    const { loadInitialData } = this.props;
-    loadInitialData();
+    const { login } = this.props;
+    login('starke@post.cz', 'bbtoggl');
   }
 
   render() {
@@ -47,9 +47,9 @@ export class HomePage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  loadInitialData: loadInitialDataAction
+  login: loginAction
 }, dispatch);
 
-const mapStateToProps = (state) => ({ response: state.toggl.response });
+const mapStateToProps = (state) => ({ data: state.toggl.response.data });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
