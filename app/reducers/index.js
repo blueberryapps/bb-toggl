@@ -1,11 +1,11 @@
 // @flow
 import { combineReducers } from 'redux';
 import { routerReducer as router } from 'react-router-redux';
-import { login } from './login';
+import { toggl } from './toggl';
 
 const rootReducer = combineReducers({
-  login,
   router,
+  toggl,
 });
 
 export default rootReducer;

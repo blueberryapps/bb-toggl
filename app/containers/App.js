@@ -5,7 +5,7 @@ import Logo from '../components/Logo/Logo';
 
 export default class App extends Component {
   props: {
-    children: Children,
+    children: Children
   }
 
   render() {
@@ -20,4 +20,4 @@ export default class App extends Component {
       </Layout.Wrapper >
     );
   }
-}
+};

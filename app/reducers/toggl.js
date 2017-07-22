@@ -1,8 +1,8 @@
-import { LOGIN_SUCCESS } from '../actions/login';
+import { LOAD_INIT_DATA_SUCCESS } from '../actions/toggl';
 
-export const login = (state = {}, action) => {
+export const toggl = (state = {}, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case LOAD_INIT_DATA_SUCCESS:
       return {
         ...state,
         response: action.payload
