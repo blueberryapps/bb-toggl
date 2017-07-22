@@ -6,7 +6,9 @@ const initialState = {
   response: null,
   isLoading: false,
   wasLoaded: false,
-  error: false
+  error: false,
+  projects: null,
+  timeEntries: null,
 };
 
 export const toggl = (state = initialState, action) => {
@@ -24,7 +26,9 @@ export const toggl = (state = initialState, action) => {
         isLogged: true,
         isLoading: false,
         wasLoaded: true,
-        response: action.payload
+        response: action.payload,
+        projects: action.payload.data.projects,
+        timeEntries: action.payload.data.time_entries
       };
     case LOGIN_ERROR:
       return {
