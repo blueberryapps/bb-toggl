@@ -14,9 +14,9 @@ export class App extends Component {
     error: any
   }
 
-  signIn(e) {
+  async signIn(e) {
     e.preventDefault();
-    this.props.signIn(this.refs.email.value, this.refs.pass.value);
+    await this.props.signIn(this.refs.email.value, this.refs.pass.value);
     this.refs.pass.value = null;
   }
 

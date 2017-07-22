@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as List from '../components/List';
 import { login as loginAction } from '../actions/toggl';
-import { groupByTimeEntryDate, secondsToHours } from '../utils/helpers';
+import { DATE_FORMAT, groupByTimeEntryDate, secondsToHours } from '../utils/helpers';
 
 export class HomePage extends Component {
   props: {
@@ -26,7 +26,7 @@ export class HomePage extends Component {
     return (
       <div>
         {grouppedTimeEntries && Object.keys(grouppedTimeEntries)
-          .sort(((a, b) => moment(b, 'DD.MM.YYYY').diff(moment(a, 'DD.MM.YYYY'), 'seconds')))
+          .sort(((a, b) => moment(b, DATE_FORMAT).diff(moment(a, DATE_FORMAT), 'seconds')))
           .map((date) => {
             const totalTime = grouppedTimeEntries[date].reduce((acc, cur) => (acc + (cur.duration > 0 ? cur.duration : 0)), 0);
 
