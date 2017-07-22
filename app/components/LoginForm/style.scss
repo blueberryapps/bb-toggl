@@ -15,6 +15,7 @@
 }
 
 .button {
+  -webkit-app-region: no-drag;
   border: 2px #00A9D8 solid;
   border-radius: 3px;
   padding: 4px 20px;
@@ -59,6 +60,7 @@
   font-size: 14px;
   font-weight: 100;
   transition: all .25s;
+  -webkit-app-region: no-drag;
   &:focus {
     background-color: rgba(0, 0, 0, .2);
   }

@@ -11,6 +11,7 @@
   font-weight: 100;
   user-select: none;
   transition: all .25s;
+  -webkit-app-region: no-drag;
   cursor: pointer;
   &:hover,
   &:focus {
