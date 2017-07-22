@@ -10,4 +10,4 @@ export const login = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
