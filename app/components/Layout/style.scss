@@ -6,9 +6,11 @@
 .header {
   background-color: #2F3242;
   height: 75px;
+  padding: 0 16px;
 }
 
 .content {
-  background-color: #FFFFFF;
   flex: auto;
+  overflow: auto;
+  height: calc(100vh - 75px);
 }
