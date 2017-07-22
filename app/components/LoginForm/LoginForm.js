@@ -17,6 +17,7 @@ export class App extends Component {
   signIn(e) {
     e.preventDefault();
     this.props.signIn(this.refs.email.value, this.refs.pass.value);
+    this.refs.pass.value = null;
   }
 
   render() {
