@@ -4,37 +4,47 @@ import * as Layout from '../components/Layout';
 import Logo from '../components/Logo/Logo';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loginOut as layoutLoginOut, loginIn as layoutLoginIn } from '../actions/layout';
+import { logout as logoutAction } from '../actions/toggl';
 import style from './style.scss';
+import LoginForm from '../components/LoginForm/LoginForm';
+import { shell } from 'electron';
 
 export class App extends Component {
   props: {
     children: Children,
-    isLoggin: any,
-    loginOut: any,
-    loginIn: any
+    isLogged: any,
+    signOut: any
+  }
+
+  openBBWeb(e) {
+    e.preventDefault();
+    shell.openExternal('https://www.blueberry.io/');
   }
 
   render() {
-    const { isLoggin } = this.props;
+    const { isLogged } = this.props;
     return (
       <Layout.Wrapper>
-        <Layout.Header isLoggin={isLoggin}>
+        <Layout.Header isLoggin={isLogged}>
           <Logo />
-          {isLoggin &&
-            <div className={style.buttonLogInOut} onClick={this.props.loginOut}>
-              Login Out
+          {isLogged ?
+            <div className={style.buttonLogInOut} onClick={this.props.signOut}>
+              Sign Out
             </div>
-          }
-          <div className={style.login}>
-            <div className={style.loginContent}>
-              <div onClick={this.props.loginIn}>
-                <button className={style.button}>
-                  Login In
-                </button>
+            :
+            <div className={style.footer}>
+              <div className={style.footerWrapper} onClick={(e) => this.openBBWeb(e)}>
+                <div className={style.logo}>
+                  <div className={style.circleWrapper}>
+                    <div className={style.smallCircle} />
+                    <div className={style.bigCircle} />
+                  </div>
+                </div>
+                created by blueberry 2017
               </div>
             </div>
-          </div>
+          }
+          <LoginForm />
         </Layout.Header>
         <Layout.Content>
           {this.props.children}
@@ -45,10 +55,11 @@ export class App extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  loginOut: layoutLoginOut,
-  loginIn: layoutLoginIn
+  signOut: logoutAction,
 }, dispatch);
 
-const mapStateToProps = (state) => ({ isLoggin: state.layout.isLoggin });
+const mapStateToProps = (state) => ({
+  isLogged: state.toggl.isLogged,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

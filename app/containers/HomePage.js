@@ -50,6 +50,6 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   login: loginAction
 }, dispatch);
 
-const mapStateToProps = (state) => ({ data: state.toggl.response.data });
+const mapStateToProps = (state) => ({ data: state.toggl.response });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

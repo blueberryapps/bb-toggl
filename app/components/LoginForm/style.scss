@@ -1,0 +1,142 @@
+.login {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  height: 100vh;
+  width: 100vw;
+}
+
+.loginContent {
+  margin: 0 auto;
+  width: 50vw;
+  max-width: 450px;
+  text-align: center;
+  padding: 16px;
+}
+
+.button {
+  border: 2px #00A9D8 solid;
+  border-radius: 3px;
+  padding: 4px 20px;
+  background-color: transparent;
+  color: #00A9D8;
+  font-size: 14px;
+  font-weight: 100;
+  user-select: none;
+  transition: all .25s;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background-color: #00A9D8;
+    color: #2F3242;
+    outline: none;
+  }
+}
+
+.inputWrapper {
+  margin-bottom: 16px;
+  user-select: none;
+}
+
+.inputLabel {
+  font-weight: 100;
+  font-size: 12px;
+  display: block;
+  text-align: left;
+  padding: 8px 16px;
+  color: #00A9D8;
+}
+
+.input {
+  width: 100%;
+  line-height: 32px;
+  background-color: rgba(0, 0, 0, .1);
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 3px;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 100;
+  transition: all .25s;
+  &:focus {
+    background-color: rgba(0, 0, 0, .2);
+  }
+  &::placeholder {
+    color: rgba(0, 0, 0, .3);
+  }
+}
+
+.inputSubmitWrapper {
+  height: 29px;
+}
+
+.isLoading {
+  padding-top: 16px;
+  input {
+    font-size: 0;
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 99px;
+    background-color: #00A9D8;
+    transition: all .25s;
+    vertical-align: top;
+    margin: 0 8px;
+    animation: bounceReverse 1s ease-in-out infinite;
+  }
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 99px;
+    background-color: #00A9D8;
+    transition: all .25s;
+    vertical-align: top;
+    animation: bounce 1s ease-in-out infinite;
+  }
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 99px;
+    background-color: #00A9D8;
+    transition: all .25s;
+    vertical-align: top;
+    animation: bounce 1s ease-in-out infinite;
+  }
+}
+
+.error {
+  color: #d82b00;
+  font-size: 12px;
+  font-weight: 100;
+  margin: 8px 0 16px;
+  user-select: none;
+}
+
+@keyframes bounce {
+  0% {
+    margin-top: -8px;
+  }
+  50% {
+    margin-top: 0px;
+  }
+  100% {
+    margin-top: -8px;
+  }
+}
+
+@keyframes bounceReverse {
+  0% {
+    margin-top: 0px;
+  }
+  50% {
+    margin-top: -8px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
