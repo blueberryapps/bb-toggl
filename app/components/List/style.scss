@@ -18,6 +18,7 @@
   margin-top: 3px;
   font-size: 10px;
   color: fade-out(#2F3242, 0.6);
+  white-space: nowrap;
 }
 
 .list {
@@ -39,6 +40,7 @@
 
 .itemName {
   flex: 1 0;
+  min-width: 0;
 }
 
 .itemMenu {
@@ -49,6 +51,7 @@
   width: 110px;
   margin-left: 20px;
   text-align: right;
+  white-space: nowrap;
 }
 
 .itemWrapper {
@@ -61,6 +64,10 @@
 .description {
   font-weight: 100;
   font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 20px;
   &.noDescription {
     color: fade-out(#2F3242, 0.6);
   }
@@ -87,11 +94,13 @@
 
 .currentTime {
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .timeFromTo {
   font-size: 10px;
   color: fade-out(#2F3242, 0.6);
+  white-space: nowrap;
 }
 
 .tagWrapper {
