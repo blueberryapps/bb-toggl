@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from '../utils/PromiseMiddleware/index';
+import injectableDependencies from '../utils/InjectDependencies/index';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 
 const history = createHashHistory();
+const dependencies = injectableDependencies();
 
 const configureStore = (initialState?: Object) => {
   // Redux Configuration
@@ -41,7 +43,7 @@ const configureStore = (initialState?: Object) => {
   /* eslint-enable no-underscore-dangle */
 
   // Apply Middleware & Compose Enhancers
-  enhancers.push(applyMiddleware(...middleware));
+  enhancers.push(applyMiddleware(dependencies, ...middleware));
   const enhancer = composeEnhancers(...enhancers);
 
   // Create Store

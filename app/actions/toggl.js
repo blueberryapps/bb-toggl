@@ -4,6 +4,7 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const TRACKING_START = 'TRACKING_START';
+export const TRACKING_START_SUCCESS = 'TRACKING_START_SUCCESS';
 
 export const login = (username, password) => {
   const options = {
@@ -24,17 +25,26 @@ export const logout = () => ({
   type: LOGOUT
 });
 
-export const startTracking = (apiToken, trackingDetails) => {
+export const startTracking = (trackingDetails) => ({ getState }) => {
   const options = {
-    body: trackingDetails,
+    body: JSON.stringify({
+      time_entry: {
+        description: '',
+        tags: null,
+        created_with: 'bb_toggl',
+        ...trackingDetails
+      }
+    }),
     method: 'POST',
     headers: {
-      Authorization: `Basic ${new Buffer(`${apiToken}:api_token`, 'utf8').toString('base64')}`
+      Authorization: `Basic ${new Buffer(`${getState().toggl.apiToken}:api_token`, 'utf8').toString('base64')}`,
+      'Content-Type': 'application/json',
     },
   };
 
   return {
     type: TRACKING_START,
     payload: fetch('https://www.toggl.com/api/v8/time_entries/start', options)
+      .then((r) => r.json())
   };
 };

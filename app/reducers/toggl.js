@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, LOGIN_START } from '../actions/toggl';
+import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, LOGIN_START, TRACKING_START_SUCCESS } from '../actions/toggl';
 
 const initialState = {
   apiToken: null,
@@ -44,6 +44,14 @@ export const toggl = (state = initialState, action) => {
         wasLoaded: false,
         error: false,
         apiToken: null
+      };
+    case TRACKING_START_SUCCESS:
+      return {
+        ...state,
+        timeEntries: [
+          ...state.timeEntries,
+          action.payload,
+        ]
       };
     default:
       return state;
