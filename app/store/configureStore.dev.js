@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import promiseMiddleware from '../utils/PromiseMiddleware/index';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
@@ -13,7 +13,7 @@ const configureStore = (initialState?: Object) => {
   const enhancers = [];
 
   // Thunk Middleware
-  middleware.push(thunk);
+  middleware.push(promiseMiddleware);
 
   // Logging Middleware
   const logger = createLogger({
