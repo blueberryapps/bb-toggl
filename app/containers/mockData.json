@@ -1,0 +1,63 @@
+[
+  {
+    "date": "Today",
+    "time": "2h 48min",
+    "list": [
+      {
+        "description": "",
+        "project": "p4 - Delivery schedule",
+        "company": "Cemex",
+        "startTime": "8:34",
+        "endTime": "11:22",
+        "time": "2h 48min 51s",
+        "tag": [
+          {
+            "name": "mobile",
+            "id": 1
+          },
+          {
+            "name": "desktop",
+            "id": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "Yesterday",
+    "time": "7h 53min",
+    "list": [
+      {
+        "description": "Onboarding",
+        "project": "_Other",
+        "company": "BlueBerry",
+        "startTime": "13:48",
+        "endTime": "17:10",
+        "time": "4h 22min 12s",
+        "tag": []
+      },
+      {
+        "description": "API presentation",
+        "project": "",
+        "company": "BlueBerry",
+        "startTime": "13:48",
+        "endTime": "17:10",
+        "time": "4h 22min 12s",
+        "tag": []
+      }
+    ]
+  }
+  ,
+  {
+    "date": "21. June 2017",
+    "time": "7h 53min",
+    "list": [
+      {
+        "startTime": "13:48",
+        "endTime": "17:10",
+        "time": "4h 22min 12s",
+        "tag": []
+      }
+    ]
+  }
+]
