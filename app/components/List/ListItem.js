@@ -9,9 +9,14 @@ export default class ListWrapper extends Component {
     time: number,
     startTime: string,
     endTime: ?string,
+    startTracking: any,
     tag: ?[string]
   };
 
+  onStartTracking() {
+    const { startTracking } = this.props;
+    startTracking({});
+  }
 
   render() {
     const { description, project, company, tag, time, startTime, endTime } = this.props;
@@ -47,7 +52,11 @@ export default class ListWrapper extends Component {
             }
           </div>
           <div className={style.itemMenu}>
-            <div className={style.continue} title="Continue with this time entry" />
+            <div
+              className={style.continue}
+              onClick={this.onStartTracking.bind(this)}
+              title="Continue with this time entry"
+            />
           </div>
           <div className={style.itemTime}>
             <div className={style.timeFromTo}>
