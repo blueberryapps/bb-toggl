@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as List from '../components/List';
-import { login as loginAction, startTracking as startTrackingAction } from '../actions/toggl';
+import { login as loginAction, startTracking as startTrackingAction, stopTracking as stopTrackingAction } from '../actions/toggl';
 import { DATE_FORMAT, groupByTimeEntryDate, secondsToHours } from '../utils/helpers';
 
 export class HomePage extends Component {
@@ -12,7 +12,8 @@ export class HomePage extends Component {
     clients: any,
     projects: any,
     timeEntries: any,
-    startTracking: any
+    startTracking: any,
+    stopTracking: any
   }
 
   componentWillMount() {
@@ -21,7 +22,7 @@ export class HomePage extends Component {
   }
 
   render() {
-    const { clients, projects, timeEntries, startTracking } = this.props;
+    const { clients, projects, timeEntries, startTracking, stopTracking } = this.props;
     const grouppedTimeEntries = timeEntries && groupByTimeEntryDate(timeEntries);
 
     return (
@@ -42,8 +43,10 @@ export class HomePage extends Component {
                   const project = projects && projects.find((p) => p.id === timeEntry.pid);
                   const client = project && project.cid && clients && clients.find((c) => c.id === project.cid);
                   const duration = timeEntry.duration > 0 ? timeEntry.duration : 0;
+                  const isActive = timeEntry.duration > 0;
 
                   return (<List.Item
+                    active={isActive}
                     description={timeEntry.description || ''}
                     key={timeEntry.id}
                     project={project && project.name}
@@ -53,8 +56,10 @@ export class HomePage extends Component {
                     time={secondsToHours(duration)}
                     tag={timeEntry.tags && timeEntry.tags}
                     startTracking={startTracking}
+                    stopTracking={stopTracking}
+                    timeEntry={timeEntry}
                   />);
-              })}
+                })}
             </List.Wrapper>);
           })}
       </div>
@@ -64,7 +69,8 @@ export class HomePage extends Component {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   login: loginAction,
-  startTracking: startTrackingAction
+  startTracking: startTrackingAction,
+  stopTracking: stopTrackingAction,
 }, dispatch);
 
 const mapStateToProps = (state) => ({
