@@ -36,22 +36,24 @@ export class HomePage extends Component {
               key={date}
               totalTime={secondsToHours(totalTime)}
             >
-              {grouppedTimeEntries[date].map((timeEntry) => {
-                const project = projects && projects.find((p) => p.id === timeEntry.pid);
-                const client = project && project.cid && clients && clients.find((c) => c.id === project.cid);
-                const duration = timeEntry.duration > 0 ? timeEntry.duration : 0;
+              {grouppedTimeEntries[date]
+                .sort(((a, b) => moment(b.start).diff(moment(a.start), 'seconds')))
+                .map((timeEntry) => {
+                  const project = projects && projects.find((p) => p.id === timeEntry.pid);
+                  const client = project && project.cid && clients && clients.find((c) => c.id === project.cid);
+                  const duration = timeEntry.duration > 0 ? timeEntry.duration : 0;
 
-                return (<List.Item
-                  description={timeEntry.description || ''}
-                  key={timeEntry.id}
-                  project={project && project.name}
-                  company={client && client.name}
-                  startTime={moment(timeEntry.start).format('HH:MM')}
-                  endTime={moment(timeEntry.stop).format('HH:MM')}
-                  time={secondsToHours(duration)}
-                  tag={timeEntry.tags && timeEntry.tags}
-                  startTracking={startTracking}
-                />);
+                  return (<List.Item
+                    description={timeEntry.description || ''}
+                    key={timeEntry.id}
+                    project={project && project.name}
+                    company={client && client.name}
+                    startTime={moment(timeEntry.start).format('HH:mm')}
+                    endTime={moment(timeEntry.stop).format('HH:mm')}
+                    time={secondsToHours(duration)}
+                    tag={timeEntry.tags && timeEntry.tags}
+                    startTracking={startTracking}
+                  />);
               })}
             </List.Wrapper>);
           })}

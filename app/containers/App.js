@@ -25,7 +25,7 @@ export class App extends Component {
     const { isLogged } = this.props;
     return (
       <Layout.Wrapper>
-        <Layout.Header isLoggin={isLogged}>
+        <Layout.Header isLogged={isLogged}>
           <Logo />
           {isLogged ?
             <div className={style.buttonLogInOut} onClick={this.props.signOut}>

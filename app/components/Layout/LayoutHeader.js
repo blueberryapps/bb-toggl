@@ -6,13 +6,13 @@ import style from './style.scss';
 export default class LayoutHeader extends Component {
   props: {
     children: Children,
-    isLoggin: Boolean,
+    isLogged: boolean
   };
 
   render() {
-    const { isLoggin } = this.props;
+    const { isLogged } = this.props;
     return (
-      <div className={[style.header, !isLoggin && style.isLoggin].filter(Boolean).join(' ')}>
+      <div className={[style.header, !isLogged && style.isLoggin].filter(Boolean).join(' ')}>
         {this.props.children}
       </div>
     );
