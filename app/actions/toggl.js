@@ -6,6 +6,7 @@ export const LOGOUT = 'LOGOUT';
 export const TRACKING_START = 'TRACKING_START';
 export const TRACKING_START_SUCCESS = 'TRACKING_START_SUCCESS';
 export const TRACKING_STOP = 'TRACKING_STOP';
+export const TRACKING_STOP_SUCCESS = 'TRACKING_STOP_SUCCESS';
 
 export const login = (username, password) => {
   const options = {

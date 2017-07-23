@@ -4,6 +4,7 @@ import style from './style.scss';
 
 export default class ListWrapper extends Component {
   props: {
+    active: boolean,
     description: string,
     project: ?string,
     company: ?string,
@@ -14,11 +15,18 @@ export default class ListWrapper extends Component {
     tag: ?[string],
     billable: boolean,
     color: ?string,
+    stopTracking: any,
+    timeEntry: any
   };
 
   onStartTracking() {
-    const { startTracking } = this.props;
-    startTracking({});
+    const { active, startTracking, stopTracking, timeEntry } = this.props;
+
+    if (!active) {
+      stopTracking(timeEntry.id);
+    } else {
+      startTracking({});
+    }
   }
 
   render() {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as List from '../components/List';
-import { login as loginAction, startTracking as startTrackingAction } from '../actions/toggl';
+import { login as loginAction, startTracking as startTrackingAction, stopTracking as stopTrackingAction } from '../actions/toggl';
 import { DATE_FORMAT, groupByTimeEntryDate, secondsToHours, formatDate } from '../utils/helpers';
 
 export class HomePage extends Component {
@@ -12,7 +12,8 @@ export class HomePage extends Component {
     clients: any,
     projects: any,
     timeEntries: any,
-    startTracking: any
+    startTracking: any,
+    stopTracking: any
   }
 
   componentWillMount() {
@@ -21,7 +22,7 @@ export class HomePage extends Component {
   }
 
   render() {
-    const { clients, projects, timeEntries, startTracking } = this.props;
+    const { clients, projects, timeEntries, startTracking, stopTracking } = this.props;
     const grouppedTimeEntries = timeEntries && groupByTimeEntryDate(timeEntries);
 
     return (
@@ -35,25 +36,31 @@ export class HomePage extends Component {
               key={date}
               totalTime={secondsToHours(totalTime)}
             >
-              {grouppedTimeEntries[date].map((timeEntry) => {
-                const project = projects && projects.find((p) => p.id === timeEntry.pid);
-                const client = project && project.cid && clients && clients.find((c) => c.id === project.cid);
-                const duration = timeEntry.duration > 0 ? timeEntry.duration : 0;
+              {grouppedTimeEntries[date]
+                .sort(((a, b) => moment(b.start).diff(moment(a.start), 'seconds')))
+                .map((timeEntry) => {
+                  const project = projects && projects.find((p) => p.id === timeEntry.pid);
+                  const client = project && project.cid && clients && clients.find((c) => c.id === project.cid);
+                  const duration = timeEntry.duration > 0 ? timeEntry.duration : 0;
+                  const isActive = timeEntry.duration > 0;
 
-                return (<List.Item
-                  description={timeEntry.description || ''}
-                  key={timeEntry.id}
-                  project={project && project.name}
-                  company={client && client.name}
-                  startTime={moment(timeEntry.start).format('HH:MM')}
-                  endTime={moment(timeEntry.stop).format('HH:MM')}
-                  time={secondsToHours(duration)}
-                  tag={timeEntry.tags && timeEntry.tags}
-                  startTracking={startTracking}
-                  billable={timeEntry.billable}
-                  color={project && project.color}
-                />);
-              })}
+                  return (<List.Item
+                    active={isActive}
+                    description={timeEntry.description || ''}
+                    key={timeEntry.id}
+                    project={project && project.name}
+                    company={client && client.name}
+                    startTime={moment(timeEntry.start).format('HH:mm')}
+                    endTime={moment(timeEntry.stop).format('HH:mm')}
+                    time={secondsToHours(duration)}
+                    tag={timeEntry.tags && timeEntry.tags}
+                    startTracking={startTracking}
+                    stopTracking={stopTracking}
+                    timeEntry={timeEntry}
+                    billable={timeEntry.billable}
+                    color={project && project.color}
+                  />);
+                })}
             </List.Wrapper>);
           })}
       </div>
@@ -63,7 +70,8 @@ export class HomePage extends Component {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   login: loginAction,
-  startTracking: startTrackingAction
+  startTracking: startTrackingAction,
+  stopTracking: stopTrackingAction,
 }, dispatch);
 
 const mapStateToProps = (state) => ({
