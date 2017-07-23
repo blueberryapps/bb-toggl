@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import icoBillable from './billable.svg';
 import style from './style.scss';
 
 export default class ListWrapper extends Component {
   props: {
     description: string,
-    project: ?number,
-    company: string,
-    time: number,
+    project: ?string,
+    company: ?string,
+    time: string,
     startTime: string,
     endTime: ?string,
     startTracking: any,
-    tag: ?[string]
+    tag: ?[string],
+    billable: boolean,
+    color: ?string,
   };
 
   onStartTracking() {
@@ -19,7 +22,7 @@ export default class ListWrapper extends Component {
   }
 
   render() {
-    const { description, project, company, tag, time, startTime, endTime } = this.props;
+    const { description, project, company, tag, time, startTime, endTime, billable, color } = this.props;
     return (
       <li className={style.item}>
         <div className={style.itemWrapper}>
@@ -30,7 +33,7 @@ export default class ListWrapper extends Component {
 
             <div className={style.projectWrapper}>
               {project &&
-                <span className={style.project}>
+                <span className={[style.project, color && style[`color${color}`]].filter(Boolean).join(' ')}>
                   {project}
                 </span>
               }
@@ -44,7 +47,14 @@ export default class ListWrapper extends Component {
             {tag && tag.length !== 0 &&
               <div className={style.tagWrapper}>
                 {tag.map((item) =>
-                  (<div key={item} className={style.tag}>
+                  (<div
+                    key={item}
+                    className={[
+                      style.tag,
+                      item === 'important' && style.tagImportant,
+                      item === 'mobile' && style.tagMobile,
+                    ].filter(Boolean).join(' ')}
+                  >
                     {item}
                   </div>)
                 )}
@@ -65,6 +75,11 @@ export default class ListWrapper extends Component {
             <div className={style.currentTime}>
               {time}
             </div>
+            {billable &&
+              <div className={style.icon}>
+                <img src={icoBillable} className={style.iconBillable} />
+              </div>
+            }
           </div>
         </div>
       </li>

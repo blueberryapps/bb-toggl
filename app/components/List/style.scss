@@ -29,7 +29,6 @@
 
 .item {
   display: block;
-  padding: 8px 16px;
   border-bottom: 1px #EBEBEB solid;
   user-select: none;
   transition: background 0.25s;
@@ -41,6 +40,7 @@
 .itemName {
   flex: 1 0;
   min-width: 0;
+  margin-left: 16px;
 }
 
 .itemMenu {
@@ -52,13 +52,14 @@
   margin-left: 20px;
   text-align: right;
   white-space: nowrap;
+  margin-right: 16px;
 }
 
 .itemWrapper {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 55px;
+  height: 71px;
 }
 
 .description {
@@ -121,8 +122,12 @@
   }
 }
 
-.tagOrange {
-  background-color: #B6A364;
+.tagImportant {
+  background-color: #d82b00;
+}
+
+.tagMobile {
+  background-color: #00A9D8;
 }
 
 .continue {
@@ -144,4 +149,76 @@
     top: 8px;
     left: 6px;
   }
+}
+
+.icon {
+  height: 16px;
+  margin-top: 3px;
+}
+
+.iconBillable {
+  width: 16px;
+  height: 16px;
+  margin-right: -4px;
+  pointer-events: none;
+}
+
+.color0 {
+  color: #00A9F8;
+}
+
+.color1 {
+  color: #C665FF;
+}
+
+.color2 {
+  color: #EC428D;
+}
+
+.color3 {
+  color: #FD8C00;
+}
+
+.color4 {
+  color: #C97401;
+}
+
+.color5 {
+  color: #44CA00;
+}
+
+.color6 {
+  color: #00BC9B;
+}
+
+.color7 {
+  color: #E29A84;
+}
+
+.color8 {
+  color: #354DB8;
+}
+
+.color9 {
+  color: #A206A7;
+}
+
+.color10 {
+  color: #F2C42C;
+}
+
+.color11 {
+  color: #1E5600;
+}
+
+.color12 {
+  color: #8B0000;
+}
+
+.color13 {
+  color: #E50000;
+}
+
+.color14 {
+  color: #000000;
 }

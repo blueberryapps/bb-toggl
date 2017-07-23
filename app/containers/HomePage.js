@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as List from '../components/List';
 import { login as loginAction, startTracking as startTrackingAction } from '../actions/toggl';
-import { DATE_FORMAT, groupByTimeEntryDate, secondsToHours } from '../utils/helpers';
+import { DATE_FORMAT, groupByTimeEntryDate, secondsToHours, formatDate } from '../utils/helpers';
 
 export class HomePage extends Component {
   props: {
@@ -30,9 +30,8 @@ export class HomePage extends Component {
           .sort(((a, b) => moment(b, DATE_FORMAT).diff(moment(a, DATE_FORMAT), 'seconds')))
           .map((date) => {
             const totalTime = grouppedTimeEntries[date].reduce((acc, cur) => (acc + (cur.duration > 0 ? cur.duration : 0)), 0);
-
             return (<List.Wrapper
-              date={date}
+              date={formatDate(date)}
               key={date}
               totalTime={secondsToHours(totalTime)}
             >
@@ -51,6 +50,8 @@ export class HomePage extends Component {
                   time={secondsToHours(duration)}
                   tag={timeEntry.tags && timeEntry.tags}
                   startTracking={startTracking}
+                  billable={timeEntry.billable}
+                  color={project && project.color}
                 />);
               })}
             </List.Wrapper>);

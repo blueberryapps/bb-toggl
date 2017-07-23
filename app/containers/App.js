@@ -25,11 +25,17 @@ export class App extends Component {
     const { isLogged } = this.props;
     return (
       <Layout.Wrapper>
-        <Layout.Header isLoggin={isLogged}>
+        <Layout.Header isLogged={isLogged}>
           <Logo />
           {isLogged ?
-            <div className={style.buttonLogInOut} onClick={this.props.signOut}>
-              Sign Out
+            <div>
+              <input className={style.addTimeInput} type="text" placeholder="What are you working on?" />
+              <div className={style.addTimeSubmit}>
+                <input type="submit" />
+              </div>
+              <div className={style.buttonLogInOut} onClick={this.props.signOut}>
+                Sign Out
+              </div>
             </div>
             :
             <div className={style.footer}>

@@ -9,3 +9,14 @@ export const groupByTimeEntryDate = (timeEntries) => timeEntries.reduce((acc, cu
   const date = moment(cur.start).format(DATE_FORMAT);
   return { ...acc, [date]: [...acc[date] || [], cur] };
 }, {});
+
+export const formatDate = (date) => {
+  switch (date) {
+    case moment().format(DATE_FORMAT):
+      return 'Today';
+    case moment().subtract(1, 'days').startOf('day').format(DATE_FORMAT):
+      return 'Yesterday';
+    default:
+      return date;
+  }
+};
