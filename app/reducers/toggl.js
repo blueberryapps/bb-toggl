@@ -1,15 +1,64 @@
 import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT, LOGIN_START, TRACKING_START_SUCCESS, TRACKING_STOP_SUCCESS } from '../actions/toggl';
 
-const initialState = {
+export type TogglState = {
+  apiToken: ?string,
+  clients: [?Client],
+  isLogged: boolean,
+  response: null,
+  isLoading: boolean,
+  wasLoaded: boolean,
+  error: boolean,
+  projects: [?Project],
+  timeEntries: [?TimeEntry]
+};
+
+export type Client = {
+  id: number,
+  wid: number,
+  name: string,
+  at: string
+};
+
+export type TimeEntry = {
+  id: number,
+  guid: string,
+  wid: number,
+  pid?: number,
+  billable: boolean,
+  start: string,
+  stop?: string,
+  duration: number,
+  description?: string,
+  duronly: boolean,
+  at: string,
+  uid: number
+};
+
+export type Project = {
+  id: number,
+  wid: number,
+  name: ?string,
+  billable: boolean,
+  is_private: boolean,
+  active: boolean,
+  template: boolean,
+  at: string,
+  created_at: string,
+  color: string,
+  auto_estimates: boolean,
+  hex_color: string
+};
+
+const initialState:TogglState = {
   apiToken: null,
-  clients: null,
+  clients: [],
   isLogged: false,
   response: null,
   isLoading: false,
   wasLoaded: false,
   error: false,
-  projects: null,
-  timeEntries: null,
+  projects: [],
+  timeEntries: [],
 };
 
 export const toggl = (state = initialState, action) => {

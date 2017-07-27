@@ -1,21 +1,27 @@
+// @flow
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import moment from 'moment';
 import icoBillable from './billable.svg';
 import style from './style.scss';
+import { startTracking, stopTracking } from '../../actions/toggl';
+import { secondsToHours } from '../../utils/helpers';
 
-export default class ListWrapper extends Component {
+class TimeEntry extends Component {
   props: {
     active: boolean,
     description: string,
     project: ?string,
     company: ?string,
-    time: string,
+    duration: number,
     startTime: string,
     endTime: ?string,
-    startTracking: any,
     tag: ?[string],
     billable: boolean,
     color: ?string,
-    stopTracking: any,
+    startTracking: (Object) => null,
+    stopTracking: (number) => null,
     timeEntry: any
   };
 
@@ -31,7 +37,9 @@ export default class ListWrapper extends Component {
   }
 
   render() {
-    const { active, description, project, company, tag, time, startTime, endTime, billable, color } = this.props;
+    const {
+      active, description, project, company, tag,
+      duration, startTime, endTime, billable, color } = this.props;
     return (
       <li className={style.item}>
         <div className={style.itemWrapper}>
@@ -85,14 +93,14 @@ export default class ListWrapper extends Component {
           </div>
           <div className={style.itemTime}>
             <div className={style.timeFromTo}>
-              {startTime} {endTime && `-  ${endTime}`}
+              {moment(startTime).format('HH:mm')} {moment(endTime).format('HH:mm') && `-  ${moment(endTime).format('HH:mm')}`}
             </div>
             <div className={style.currentTime}>
-              {time}
+              {secondsToHours(duration)}
             </div>
             {billable &&
               <div className={style.icon}>
-                <img src={icoBillable} className={style.iconBillable} />
+                <img src={icoBillable} className={style.iconBillable} alt="" />
               </div>
             }
           </div>
@@ -101,3 +109,14 @@ export default class ListWrapper extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      startTracking,
+      stopTracking,
+    },
+    dispatch,
+  );
+
+export default connect(null, mapDispatchToProps)(TimeEntry);
