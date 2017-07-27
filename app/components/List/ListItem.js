@@ -22,15 +22,16 @@ export default class ListWrapper extends Component {
   onStartTracking() {
     const { active, startTracking, stopTracking, timeEntry } = this.props;
 
-    if (!active) {
+    if (active) {
       stopTracking(timeEntry.id);
     } else {
-      startTracking({});
+      const { billable, createdWith, description, pid, tags } = timeEntry;
+      startTracking({ billable, createdWith, description, pid, tags });
     }
   }
 
   render() {
-    const { description, project, company, tag, time, startTime, endTime, billable, color } = this.props;
+    const { active, description, project, company, tag, time, startTime, endTime, billable, color } = this.props;
     return (
       <li className={style.item}>
         <div className={style.itemWrapper}>
@@ -71,9 +72,15 @@ export default class ListWrapper extends Component {
           </div>
           <div className={style.itemMenu}>
             <div
-              className={style.continue}
+              role="button"
+              tabIndex="0"
+              className={[
+                style.button,
+                !active && style.continue,
+                active && style.stop
+              ].filter(Boolean).join(' ')}
               onClick={this.onStartTracking.bind(this)}
-              title="Continue with this time entry"
+              title={active ? 'Stop this time entry' : 'Continue with this time entry'}
             />
           </div>
           <div className={style.itemTime}>

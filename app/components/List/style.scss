@@ -130,13 +130,22 @@
   background-color: #00A9D8;
 }
 
-.continue {
+.button {
   cursor: pointer;
   width: 24px;
   height: 24px;
   border-radius: 99px;
   border: 1px fade-out(#2F3242, 0.7) solid;
   position: relative;
+  outline: none;
+  &:hover {
+    transition: all .25s;
+    background-color: #f2f3f8;
+    border-color: #00A9D8;
+  }
+}
+
+.continue {
   &::after {
     content: "";
     display: block;
@@ -148,6 +157,19 @@
     position: absolute;
     top: 8px;
     left: 6px;
+  }
+}
+
+.stop {
+  &::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: #00A9D8;
+    position: absolute;
+    top: 9px;
+    left: 9px;
   }
 }
 

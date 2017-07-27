@@ -42,7 +42,7 @@ export class HomePage extends Component {
                   const project = projects && projects.find((p) => p.id === timeEntry.pid);
                   const client = project && project.cid && clients && clients.find((c) => c.id === project.cid);
                   const duration = timeEntry.duration > 0 ? timeEntry.duration : 0;
-                  const isActive = timeEntry.duration > 0;
+                  const isActive = timeEntry.duration < 0;
 
                   return (<List.Item
                     active={isActive}
