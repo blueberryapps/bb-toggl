@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DateTimeEntries from '../components/DateTimeEntries/DateTimeEntries';
-import { groupByTimeEntryDate } from '../utils/helpers';
 import {
   login as loginAction
 } from '../actions/toggl';
+import type { Client, Project, GrouppedTimeEntries } from '../reducers/toggl';
 
 export class HomePage extends Component {
   props: {
-    login: any,
-    clients: any,
-    projects: any,
-    timeEntries: any
+    login: () => null,
+    clients: Array<Client>,
+    projects: Array<Project>,
+    timeEntries: GrouppedTimeEntries
   }
 
   componentWillMount() {
@@ -22,11 +22,9 @@ export class HomePage extends Component {
 
   render() {
     const { clients, projects, timeEntries } = this.props;
-    const grouppedTimeEntries = timeEntries && groupByTimeEntryDate(timeEntries);
-
     return (
       <DateTimeEntries
-        items={grouppedTimeEntries}
+        items={timeEntries}
         clients={clients}
         projects={projects}
       />

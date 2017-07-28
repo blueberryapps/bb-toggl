@@ -3,32 +3,33 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import style from './style.scss';
 import TimeEntry from '../TimeEntry/TimeEntry';
-import { formatDate } from '../../utils/helpers';
+import { formatDate, secondsToHours } from '../../utils/helpers';
+import type { Project, Client, TimeEntry as TimeEntryType } from '../../reducers/toggl';
 
 export default class DateTimeEntry extends Component {
   props: {
     date: string,
-    totalTime: string,
-    items: Object,
-    clients: ?Object,
-    projects: ?Array<Object>
+    totalTime: number,
+    entries: Array<TimeEntryType>,
+    clients: Array<Client>,
+    projects: Array<Project>
   };
 
   render() {
-    const { date, totalTime, items, clients, projects } = this.props;
+    const { date, totalTime, entries, clients, projects } = this.props;
 
-    if (!items[date]) return null;
+    if (!entries) return null;
 
     return (
       <div>
         <div className={style.date}>
           {formatDate(date)}
           <span className={style.time}>
-            {totalTime}
+            {secondsToHours(totalTime)}
           </span>
         </div>
         <ul className={style.list}>
-          {items[date]
+          {entries
             .sort((a, b) => moment(b.start).diff(moment(a.start), 'seconds'))
             .map(timeEntry => {
               const project = projects.find(p => p.id === timeEntry.pid) || {};

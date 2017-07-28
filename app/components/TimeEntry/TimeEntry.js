@@ -8,6 +8,7 @@ import style from './style.scss';
 import { startTracking, stopTracking } from '../../actions/toggl';
 import { secondsToHours } from '../../utils/helpers';
 import Timer from '../Timer/Timer';
+import type { TimeEntry as TimeEntryType } from '../../reducers/toggl';
 
 class TimeEntry extends Component {
   props: {
@@ -23,7 +24,7 @@ class TimeEntry extends Component {
     color: ?string,
     startTracking: (Object) => null,
     stopTracking: (number) => null,
-    timeEntry: any
+    timeEntry: TimeEntryType
   };
 
   onStartTracking = () => {

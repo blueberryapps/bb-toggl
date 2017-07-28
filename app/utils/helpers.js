@@ -3,14 +3,23 @@ import moment from 'moment';
 export const DATE_FORMAT = 'DD. MMMM YYYY';
 export const TIME_FORMAT = 'H[h] mm[m] ss[s]';
 
-export const secondsToHours = (seconds) => moment('1900-01-01').startOf('day').seconds(seconds).format(TIME_FORMAT);
+export const secondsToHours = (seconds: number): string => {
+  const numberOfSeconds = seconds < 0 ? 0 : seconds;
+  return moment('1900-01-01').startOf('day').seconds(numberOfSeconds).format(TIME_FORMAT);
+};
 
-export const groupByTimeEntryDate = (timeEntries) => timeEntries.reduce((acc, cur) => {
-  const date = moment(cur.start).format(DATE_FORMAT);
-  return { ...acc, [date]: [...acc[date] || [], cur] };
-}, {});
+export const getDayInDateFormat = (date: string): string => moment(date).format(DATE_FORMAT);
 
-export const formatDate = (date) => {
+export const groupByTimeEntryDate = (timeEntries: Array<TimeEntry>): GrouppedTimeEntries =>
+  timeEntries.reduce((acc, cur) => {
+    const date = getDayInDateFormat(cur.start);
+    const data = acc[date] || {};
+    const entries = [...(data.entries || []), cur];
+    const totalTime = (data.totalTime || 0) + (cur.duration > 0 ? cur.duration : 0);
+    return { ...acc, [date]: { entries, totalTime } };
+  }, {});
+
+export const formatDate = (date: string): string => {
   switch (date) {
     case moment().format(DATE_FORMAT):
       return 'Today';

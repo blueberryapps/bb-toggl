@@ -12,7 +12,7 @@ export default class Timer extends Component {
     duration: 0
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { from } = this.props;
     const now = moment(new Date());
     const startsFrom = moment(from);
@@ -27,10 +27,11 @@ export default class Timer extends Component {
       });
     }, 1000);
   }
-
   componentWillUnmount() {
     clearInterval(this.timer);
   }
+
+  timer = -1;
 
   render() {
     return <div>{secondsToHours(this.state.duration)}</div>;
