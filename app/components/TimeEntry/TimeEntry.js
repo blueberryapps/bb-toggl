@@ -7,6 +7,7 @@ import icoBillable from './billable.svg';
 import style from './style.scss';
 import { startTracking, stopTracking } from '../../actions/toggl';
 import { secondsToHours } from '../../utils/helpers';
+import Timer from '../Timer/Timer';
 
 class TimeEntry extends Component {
   props: {
@@ -25,7 +26,7 @@ class TimeEntry extends Component {
     timeEntry: any
   };
 
-  onStartTracking() {
+  onStartTracking = () => {
     const { active, startTracking, stopTracking, timeEntry } = this.props;
 
     if (active) {
@@ -87,7 +88,7 @@ class TimeEntry extends Component {
                 !active && style.continue,
                 active && style.stop
               ].filter(Boolean).join(' ')}
-              onClick={this.onStartTracking.bind(this)}
+              onClick={this.onStartTracking}
               title={active ? 'Stop this time entry' : 'Continue with this time entry'}
             />
           </div>
@@ -96,7 +97,9 @@ class TimeEntry extends Component {
               {moment(startTime).format('HH:mm')} {moment(endTime).format('HH:mm') && `-  ${moment(endTime).format('HH:mm')}`}
             </div>
             <div className={style.currentTime}>
-              {secondsToHours(duration)}
+              {duration > 0 && endTime
+                ? secondsToHours(duration)
+                : <Timer from={startTime} />}
             </div>
             {billable &&
               <div className={style.icon}>
