@@ -4,7 +4,7 @@ import moment from 'moment';
 import style from './style.scss';
 import TimeEntry from '../TimeEntry/TimeEntry';
 import { formatDate, secondsToHours } from '../../utils/helpers';
-import type { Project, Client, TimeEntry as TimeEntryType } from '../../reducers/toggl';
+import type { Project, Client, TimeEntry as TimeEntryType } from '../../types';
 
 export default class DateTimeEntry extends Component {
   props: {

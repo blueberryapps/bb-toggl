@@ -5,7 +5,7 @@ import DateTimeEntries from '../components/DateTimeEntries/DateTimeEntries';
 import {
   login as loginAction
 } from '../actions/toggl';
-import type { Client, Project, GrouppedTimeEntries } from '../reducers/toggl';
+import type { Client, Project, GrouppedTimeEntries } from '../types';
 
 export class HomePage extends Component {
   props: {

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { TimeEntry, GrouppedTimeEntries } from '../types';
 
 export const DATE_FORMAT = 'DD. MMMM YYYY';
 export const TIME_FORMAT = 'H[h] mm[m] ss[s]';
