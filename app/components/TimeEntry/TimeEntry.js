@@ -1,36 +1,47 @@
+// @flow
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import moment from 'moment';
 import icoBillable from './billable.svg';
 import style from './style.scss';
+import { startTracking, stopTracking } from '../../actions/toggl';
+import { secondsToHours } from '../../utils/helpers';
+import Timer from '../Timer/Timer';
+import type { TimeEntry as TimeEntryType } from '../../types';
 
-export default class ListWrapper extends Component {
+class TimeEntry extends Component {
   props: {
     active: boolean,
     description: string,
     project: ?string,
     company: ?string,
-    time: string,
+    duration: number,
     startTime: string,
     endTime: ?string,
-    startTracking: any,
     tag: ?[string],
     billable: boolean,
     color: ?string,
-    stopTracking: any,
-    timeEntry: any
+    startTracking: (TimeEntryType) => null,
+    stopTracking: (number) => null,
+    timeEntry: TimeEntryType
   };
 
-  onStartTracking() {
+  onStartTracking = () => {
     const { active, startTracking, stopTracking, timeEntry } = this.props;
 
-    if (!active) {
+    if (active) {
       stopTracking(timeEntry.id);
     } else {
-      startTracking({});
+      const { billable, createdWith, description, pid, tags } = timeEntry;
+      startTracking({ billable, createdWith, description, pid, tags });
     }
   }
 
   render() {
-    const { description, project, company, tag, time, startTime, endTime, billable, color } = this.props;
+    const {
+      active, description, project, company, tag,
+      duration, startTime, endTime, billable, color } = this.props;
     return (
       <li className={style.item}>
         <div className={style.itemWrapper}>
@@ -71,21 +82,29 @@ export default class ListWrapper extends Component {
           </div>
           <div className={style.itemMenu}>
             <div
-              className={style.continue}
-              onClick={this.onStartTracking.bind(this)}
-              title="Continue with this time entry"
+              role="button"
+              tabIndex="0"
+              className={[
+                style.button,
+                !active && style.continue,
+                active && style.stop
+              ].filter(Boolean).join(' ')}
+              onClick={this.onStartTracking}
+              title={active ? 'Stop this time entry' : 'Continue with this time entry'}
             />
           </div>
           <div className={style.itemTime}>
             <div className={style.timeFromTo}>
-              {startTime} {endTime && `-  ${endTime}`}
+              {moment(startTime).format('HH:mm')} {moment(endTime).format('HH:mm') && `-  ${moment(endTime).format('HH:mm')}`}
             </div>
             <div className={style.currentTime}>
-              {time}
+              {duration > 0 && endTime
+                ? secondsToHours(duration)
+                : <Timer from={startTime} />}
             </div>
             {billable &&
               <div className={style.icon}>
-                <img src={icoBillable} className={style.iconBillable} />
+                <img src={icoBillable} className={style.iconBillable} alt="" />
               </div>
             }
           </div>
@@ -94,3 +113,14 @@ export default class ListWrapper extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      startTracking,
+      stopTracking,
+    },
+    dispatch,
+  );
+
+export default connect(null, mapDispatchToProps)(TimeEntry);

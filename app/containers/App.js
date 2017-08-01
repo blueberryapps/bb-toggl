@@ -55,7 +55,7 @@ export class App extends Component {
         <Layout.Content>
           {this.props.children}
         </Layout.Content>
-      </Layout.Wrapper >
+      </Layout.Wrapper>
     );
   }
 }
